@@ -39,6 +39,15 @@ const raceTracks = document.createElement('div');
 raceTracks.id = 'tracks-container'
 garageView.appendChild(raceTracks);
 
+//build 7 tracks
+const numPerPage = 7;
+let track;
+for (let i = 0; i < numPerPage; i++) {
+    track = document.createElement('div');
+    track.classList.add('race-track');
+    raceTracks.appendChild(track);
+}
+
 //create div with pagination buttons
 const pgNavContainer = document.createElement('div');
 pgNavContainer.classList.add('page-nav-container')
@@ -55,20 +64,21 @@ pgNavContainer.appendChild(prevBtn);
 pgNavContainer.appendChild(currentPgNum);
 pgNavContainer.appendChild(nextBtn);
 
-//use get here
 
-const a = 0;
+//populate tracks with cars and implement pagination
 
 (async () => {
     await get().then(data => {
-        //create race track for each car and inser it into track container
+        // array of html dom divs for tracks
+        const tracksArr = Array.from(document.getElementsByClassName('race-track'));
 
         //pagination variables
         const numOfCars = data.length;
-        const numPerPage = 2;
         let currentPage = 1;
         let numOfPages = Math.ceil(numOfCars / numPerPage);
+        let excessTracksNum = numOfCars % numPerPage;
         let pageArr;
+
 
         //build first page
         getPgItems(currentPage);
@@ -85,7 +95,18 @@ const a = 0;
             } else {
                 currentPage++;
                 getPgItems(currentPage);
-                buildPage(currentPage);
+                buildPage();
+            }
+        })
+
+        //add event listener to 'previous' button
+        prevBtn.addEventListener('click', function () {
+            if (currentPage === 1) {
+                return;
+            } else {
+                currentPage--;
+                getPgItems(currentPage);
+                buildPage();
             }
         })
 
@@ -100,26 +121,38 @@ const a = 0;
 
         //pagination logic
         function buildPage() {
-            pageArr.forEach(function (i) {
-                const track = document.createElement('div');
-                track.classList.add('race-track');
-                raceTracks.appendChild(track);
-                track.innerHTML = `
-                    <i class="fa-solid fa-car-side" id="${i.id}-color"></i>
-                    <p id='${i.id}'></p>
+            if (excessTracksNum > 0 && currentPage == numOfPages) {
+                for (let i = tracksArr.length - 1; i >= excessTracksNum; i--) {
+
+                    tracksArr[i].style.display = 'none';
+                }
+            } else {
+                for (let i = tracksArr.length - 1; i >= excessTracksNum; i--) {
+
+                    tracksArr[i].style.display = 'flex';
+                }
+            }
+
+            for (let i = 0; i < pageArr.length; i++) {
+                tracksArr[i].innerHTML = `
+                <i class="fa-solid fa-car-side" id="${pageArr[i].id}-color"></i>
+                <p id='${pageArr[i].id}'></p>
                 `
 
-                document.getElementById(`${i.id}`).innerText = `${i.name}`
-                document.getElementById(`${i.id}-color`).style.color = i.color;
-            })
+                document.getElementById(`${pageArr[i].id}`).innerText = `${pageArr[i].name}`
+                document.getElementById(`${pageArr[i].id}-color`).style.color = pageArr[i].color;
+            }
+
+
+
         }
 
-        function hidePage() {
 
-        }
 
     })
 })()
+
+
 
 
 
