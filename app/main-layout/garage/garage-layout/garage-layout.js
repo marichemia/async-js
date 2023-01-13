@@ -1,6 +1,9 @@
 import * as garage from '../garage.js'
 import { get } from '../methods/get.js';
 import { create, update } from './layout-components/form.js'
+import { raceTracks, numPerPage } from './layout-components/race-tracks.js';
+
+import { pgNavContainer } from './layout-components/pagination.js';
 
 
 export const garageView = document.createElement('div');
@@ -34,39 +37,18 @@ garageView.appendChild(total);
 garageView.appendChild(create);
 garageView.appendChild(update);
 
-//race track container and insert it into garage view
-const raceTracks = document.createElement('div');
-raceTracks.id = 'tracks-container'
+//create race track container
 garageView.appendChild(raceTracks);
 
-//build 7 tracks
-const numPerPage = 7;
-let track;
-for (let i = 0; i < numPerPage; i++) {
-    track = document.createElement('div');
-    track.classList.add('race-track');
-    raceTracks.appendChild(track);
-}
+//build 7 tracks --imported
 
-//create div with pagination buttons
-const pgNavContainer = document.createElement('div');
-pgNavContainer.classList.add('page-nav-container')
-const nextBtn = document.createElement('button');
-nextBtn.innerHTML = `
-    <i class="fa-solid fa-circle-right"></i>
-`
-const prevBtn = document.createElement('button');
-prevBtn.innerHTML = `
-    <i class="fa-solid fa-circle-left"></i>
-`
-const currentPgNum = document.createElement('div');
-pgNavContainer.appendChild(prevBtn);
-pgNavContainer.appendChild(currentPgNum);
-pgNavContainer.appendChild(nextBtn);
+
+//create div with pagination buttons --imported
+
 
 
 //populate tracks with cars and implement pagination
-
+/*
 (async () => {
     await get().then(data => {
         // array of html dom divs for tracks
@@ -151,7 +133,7 @@ pgNavContainer.appendChild(nextBtn);
 
     })
 })()
-
+*/
 
 
 

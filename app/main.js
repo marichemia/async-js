@@ -9,6 +9,7 @@ import { deleteCar } from './main-layout/garage/methods/delete.js';
 import { updateCar } from './main-layout/garage/methods/update.js';
 import { controlEngine } from './main-layout/garage/methods/controlEngine.js';
 import { drive } from './main-layout/garage/methods/drive.js';
+import { garageJS } from "./main-layout/garage/garage.js";
 
 
 
@@ -24,10 +25,8 @@ body.appendChild(viewContainer);
 // i make racing track
 // every track has remove and select buttons
 //with event listener when you click on select the id variable will be equal to an id of that car. Then the id will be passed to update function, and the input will also have that car's name (name will be passed as well automatically with an id)
-let id = 0;
 
-create.addEventListener('submit', async function (e) {
-
+create.addEventListener('submit', async function () {
     createCar(document.getElementById('create-name').value, document.getElementById('create-color').value);
 
 })
@@ -39,14 +38,10 @@ create.addEventListener('submit', async function (e) {
 })*/
 
 
-//pagination??
-
-const numOfCars = 0;
-const numPerPage = 4;
-const currentPage = 1;
-const numOfPages = Math.ceil(numOfCars / numPerPage);
 
 //
+
+garageJS();
 
 
 

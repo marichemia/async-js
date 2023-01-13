@@ -12,5 +12,5 @@ export const update = document.createElement('form');
 update.innerHTML = `
 <input type="text" id="update-name">
 <input type="color" id="update-color">
-<button type="submit">Update</button>
+<button type="submit" disabled>Update</button>
 `
