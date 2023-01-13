@@ -21,18 +21,21 @@ a {
 
 #tracks-container {
     width: 100%;
-    height: 800px;
+    height: 1450px;
     background-color: darkolivegreen;
 }
 
 .race-track {
     width: 100%;
-    height: 120px;
+    height: 200px;
     background-color: darkgreen;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    border-bottom: dashed 2px white;
 }
 
 .fa-car-side {

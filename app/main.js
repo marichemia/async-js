@@ -7,6 +7,7 @@ import { get } from './main-layout/garage/methods/get.js';
 import { createCar } from './main-layout/garage/methods/create.js';
 import { deleteCar } from './main-layout/garage/methods/delete.js';
 import { updateCar } from './main-layout/garage/methods/update.js';
+import { id } from "./main-layout/garage/garage.js";
 import { controlEngine } from './main-layout/garage/methods/controlEngine.js';
 import { drive } from './main-layout/garage/methods/drive.js';
 import { garageJS } from "./main-layout/garage/garage.js";
@@ -31,11 +32,10 @@ create.addEventListener('submit', async function () {
 
 })
 
-//needs work yet
-/*update.addEventListener('submit', async function (e) {
-    e.preventDefault();
+update.addEventListener('submit', async function (e) {
+
     updateCar(id, document.getElementById('update-name').value, document.getElementById('update-color').value);
-})*/
+})
 
 
 

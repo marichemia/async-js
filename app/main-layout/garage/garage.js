@@ -11,6 +11,7 @@ import { currentPgNum, pgNavContainer, nextBtn, prevBtn } from './garage-layout/
 
 export const garageUrl = 'http://127.0.0.1:3000/garage';
 export const engineUrl = 'http://127.0.0.1:3000/engine';
+export let id;
 
 export const garageJS = async function () {
     await get().then(data => {
@@ -80,12 +81,27 @@ export const garageJS = async function () {
 
             for (let i = 0; i < pageArr.length; i++) {
                 tracksArr[i].innerHTML = `
-                <i class="fa-solid fa-car-side" id="${pageArr[i].id}-color"></i>
+                <button id="${pageArr[i].id}-select">Select</button>
+                <button id="${pageArr[i].id}-remove" class="remove-btn">Remove</button>
                 <p id='${pageArr[i].id}'></p>
+                <i class="fa-solid fa-car-side" id="${pageArr[i].id}-color"></i> 
                 `
 
                 document.getElementById(`${pageArr[i].id}`).innerText = `${pageArr[i].name}`
                 document.getElementById(`${pageArr[i].id}-color`).style.color = pageArr[i].color;
+
+                document.getElementById(`${pageArr[i].id}-select`).addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.getElementById('update-name').value = `${pageArr[i].name}`;
+                    document.getElementById('update-color').value = `${pageArr[i].color}`;
+                    id = pageArr[i].id;
+                    document.getElementById('update-btn').disabled = false;
+                })
+
+                document.getElementById(`${pageArr[i].id}-remove`).addEventListener('click', function () {
+                    deleteCar(pageArr[i].id);
+                    location.reload();
+                })
             }
 
 
