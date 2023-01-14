@@ -84,6 +84,8 @@ export const garageJS = async function () {
                 <button id="${pageArr[i].id}-select">Select</button>
                 <button id="${pageArr[i].id}-remove" class="remove-btn">Remove</button>
                 <p id='${pageArr[i].id}'></p>
+                <button id="${pageArr[i].id}-start">Start</button>
+                <button id="${pageArr[i].id}-stop">Stop</button>
                 <i class="fa-solid fa-car-side" id="${pageArr[i].id}-color"></i> 
                 `
 
@@ -101,6 +103,14 @@ export const garageJS = async function () {
                 document.getElementById(`${pageArr[i].id}-remove`).addEventListener('click', function () {
                     deleteCar(pageArr[i].id);
                     location.reload();
+                })
+
+                document.getElementById(`${pageArr[i].id}-start`).addEventListener('click', function () {
+                    controlEngine(pageArr[i].id, 'started')
+                    drive(pageArr[i].id, 'drive');
+
+
+
                 })
             }
 

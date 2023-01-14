@@ -11,6 +11,7 @@ import { id } from "./main-layout/garage/garage.js";
 import { controlEngine } from './main-layout/garage/methods/controlEngine.js';
 import { drive } from './main-layout/garage/methods/drive.js';
 import { garageJS } from "./main-layout/garage/garage.js";
+import { generateCars } from "./main-layout/garage/methods/generateCars.js";
 
 
 
@@ -42,6 +43,11 @@ update.addEventListener('submit', async function (e) {
 //
 
 garageJS();
+
+document.getElementById('generate-btn').addEventListener('click', function () {
+    generateCars();
+})
+
 
 
 

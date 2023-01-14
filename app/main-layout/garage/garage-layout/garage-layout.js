@@ -37,6 +37,12 @@ garageView.appendChild(total);
 garageView.appendChild(create);
 garageView.appendChild(update);
 
+//generate cars button
+const generateBtn = document.createElement('button');
+generateBtn.innerText = 'Generate Cars';
+generateBtn.id = 'generate-btn';
+garageView.appendChild(generateBtn);
+
 //create race track container
 garageView.appendChild(raceTracks);
 
