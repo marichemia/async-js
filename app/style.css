@@ -38,9 +38,28 @@ a {
     border-bottom: dashed 2px white;
 }
 
+@keyframes drive {
+    0% {
+        left: 0%;
+    }
+
+    100% {
+        left: 90%;
+    }
+}
+
+.animation {
+    animation-name: drive;
+    animation-duration: 0ms;
+}
+
+
 .fa-car-side {
     font-size: 70px;
+    position: relative;
+    left: 0%;
 }
+
 
 .page-nav-container {
     display: flex;

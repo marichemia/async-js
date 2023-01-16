@@ -5,10 +5,13 @@ export const controlEngine = async function (id, status) {
     params.append('id', id);
     params.append('status', status);
 
-    fetch(`${engineUrl}?${params}`, {
+    return fetch(`${engineUrl}?${params}`, {
         method: 'PATCH'
     })
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => {
+            const time = data.distance / data.velocity;
+            return time;
+        });
 
 }

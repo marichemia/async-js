@@ -7,18 +7,21 @@ export const drive = async function (id, status) {
     params.append('id', id);
     params.append('status', status);
 
-    fetch(`${engineUrl}?${params}`, {
+    return fetch(`${engineUrl}?${params}`, {
         method: 'PATCH'
     })
-        .then(response => response.json())
-        .then(data => {
+        .then(response => {
 
-            console.log(data['success'])
-            if (data['success']) {
-                console.log('car moves')
-            } else {
-                controlEngine(id, 'stopped')
+
+
+            if (response.status == 500) {
+                return { success: false };
+            } else if (response.status == 200) {
+                return response.json();
             }
 
+        })
+        .then(data => {
+            return data;
         });
 }

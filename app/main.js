@@ -46,7 +46,19 @@ garageJS();
 
 document.getElementById('generate-btn').addEventListener('click', function () {
     generateCars();
+    location.reload();
 })
+
+
+/*window.onload = function () {
+    Array.from(document.getElementsByClassName('start-btn')).forEach(element => {
+        element.addEventListener('click', function () {
+            controlEngine
+        })
+    });
+}*/
+
+
 
 
 

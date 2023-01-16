@@ -84,7 +84,7 @@ export const garageJS = async function () {
                 <button id="${pageArr[i].id}-select">Select</button>
                 <button id="${pageArr[i].id}-remove" class="remove-btn">Remove</button>
                 <p id='${pageArr[i].id}'></p>
-                <button id="${pageArr[i].id}-start">Start</button>
+                <button id="${pageArr[i].id}-start" class= "start-btn">Start</button>
                 <button id="${pageArr[i].id}-stop">Stop</button>
                 <i class="fa-solid fa-car-side" id="${pageArr[i].id}-color"></i> 
                 `
@@ -106,8 +106,35 @@ export const garageJS = async function () {
                 })
 
                 document.getElementById(`${pageArr[i].id}-start`).addEventListener('click', function () {
-                    controlEngine(pageArr[i].id, 'started')
-                    drive(pageArr[i].id, 'drive');
+                    controlEngine(pageArr[i].id, 'started').then(value => {
+                        drive(pageArr[i].id, 'drive').then(status => {
+
+                            console.log(status['success']);
+                            const car = document.getElementById(`${pageArr[i].id}-color`);
+
+
+                            car.classList.add('animation');
+
+                            car.addEventListener('animationstart', checkEngine);
+                            car.style.animationDuration = (value / 1000) + 's';
+
+
+
+                            car.addEventListener('animationend', () => {
+                                car.classList.remove('animation');
+                            })
+
+                            function checkEngine() {
+                                if (!status['success']) {
+                                    car.animationPlayState = "paused";
+                                    car.style.animationDuration = '';
+                                }
+                            }
+
+                        })
+
+                    })
+
 
 
 
@@ -122,5 +149,7 @@ export const garageJS = async function () {
 
     })
 }
+
+
 
 
