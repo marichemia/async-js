@@ -22,6 +22,7 @@ export const drive = async function (id, status) {
 
         })
         .then(data => {
+            console.log(data)
             return data;
         });
 }

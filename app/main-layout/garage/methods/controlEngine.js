@@ -10,6 +10,7 @@ export const controlEngine = async function (id, status) {
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             const time = data.distance / data.velocity;
             return time;
         });

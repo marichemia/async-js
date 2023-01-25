@@ -15,14 +15,14 @@ garageView.classList.add('view-container');
 //title
 const title = document.createElement('h1');
 title.innerHTML = `
-    You are now inside Garage view
+    Garage
 `
 garageView.appendChild(title);
 
 //page number
 const pageNum = document.createElement('h3');
 pageNum.innerHTML = `
-    You are now on page #_____
+    page #_____
 `
 garageView.appendChild(pageNum);
 

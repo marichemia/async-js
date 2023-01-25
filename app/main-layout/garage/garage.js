@@ -85,7 +85,7 @@ export const garageJS = async function () {
                 <button id="${pageArr[i].id}-remove" class="remove-btn">Remove</button>
                 <p id='${pageArr[i].id}'></p>
                 <button id="${pageArr[i].id}-start" class= "start-btn">Start</button>
-                <button id="${pageArr[i].id}-stop">Stop</button>
+                <button id="${pageArr[i].id}-reset">Reset</button>
                 <i class="fa-solid fa-car-side" id="${pageArr[i].id}-color"></i> 
                 `
 
@@ -105,29 +105,41 @@ export const garageJS = async function () {
                     location.reload();
                 })
 
+                const car = document.getElementById(`${pageArr[i].id}-color`);
+
                 document.getElementById(`${pageArr[i].id}-start`).addEventListener('click', function () {
                     controlEngine(pageArr[i].id, 'started').then(value => {
                         drive(pageArr[i].id, 'drive').then(status => {
 
                             console.log(status['success']);
-                            const car = document.getElementById(`${pageArr[i].id}-color`);
+
+
+                            car.addEventListener('animationstart', () => {
+                                let animationInterval = setInterval(() => {
+                                    if (!status['success']) {
+                                        console.log('event fired')
+                                        car.style.animationPlayState = "paused";
+                                        clearInterval(animationInterval);
+                                    }
+                                }, 1500);
+                            });
 
 
                             car.classList.add('animation');
+                            car.style.animationFillMode = "forwards";
 
-                            car.addEventListener('animationstart', checkEngine);
                             car.style.animationDuration = (value / 1000) + 's';
 
 
 
                             car.addEventListener('animationend', () => {
-                                car.classList.remove('animation');
+                                car.style.animationPlayState = "paused";
                             })
 
-                            function checkEngine() {
-                                if (!status['success']) {
-                                    car.animationPlayState = "paused";
-                                    car.style.animationDuration = '';
+                            function checkEngine(status) {
+                                if (!status) {
+                                    console.log('aaaa')
+                                    car.classList.remove('animation');
                                 }
                             }
 
@@ -138,6 +150,12 @@ export const garageJS = async function () {
 
 
 
+                })
+
+                document.getElementById(`${pageArr[i].id}-reset`).addEventListener('click', function () {
+                    car.classList.remove("animation");
+                    controlEngine(pageArr[i].id, 'stopped');
+                    car.classList.add('original-state');
                 })
             }
 
